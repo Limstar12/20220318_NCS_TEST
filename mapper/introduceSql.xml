@@ -1,0 +1,63 @@
+<!-- SQL만 관리하는 애 -->
+
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="introduceSql">
+    <select id="interview">
+        select
+            *
+        FROM reactinterview.interview
+    </select>
+
+    <select id="portfolio">
+        select
+            no
+            , category
+            , subjet
+            , content
+            , imgSrc
+            , imgWidth
+            , imgHeight
+        FROM reactinterview.portfolio
+    </select>
+    <insert id="interviewInsert">
+    insert into
+        react_suppose.suppose(
+            comNM,
+            data_time,
+            position,
+            ability,
+            phoneNB
+            )
+            value(
+                '안좋은회사'
+                , '7월 7일 7시'
+                , '마케팅'
+                , '1.2'
+                , '01011111111'
+            );
+    </insert>
+        <insert id="interviewInsertReview">
+    insert into
+        react_suppose.suppose(
+            subject
+            , content
+            <if test=" isimgSrc != '' && isimgSrc != null ">   <!-- 값이 비어있지 않거나 값이 정확(!=null)할 때 돌아간다 -->
+            , imgSrc
+            , imgidentity
+            </if>
+            , data 
+            )
+            value(
+                '제목자리'
+                , '내용자리'
+                <if> <!-- 네임은 똑같을 필요는 없지만 개발자들은 귀찮아서 같게 한다 -->
+                , #{isimgSrc}
+                , #{isimgidentity}
+                </if>
+                , '개발코드'
+            );
+    </insert>
+</mapper>
